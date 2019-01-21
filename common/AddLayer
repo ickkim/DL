@@ -1,0 +1,18 @@
+class AddLayer:
+    def __init__(self):
+#        self.x = x  # ??초기화 불필요?? 생략
+#        self.y = y  # ??초기화 불필요?? 생략     
+        pass    
+        
+    def forward(self, x, y):
+#        self.x = x  # 생략 
+#        self.y = y  # 생략
+        out = x + y 
+        
+        return out
+        
+    def backward(self, dout):
+        dx = dout
+        dy = dout
+        
+        return dx, dy
