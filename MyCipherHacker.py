@@ -42,3 +42,4 @@ class MyCipherHacker:
 # This is my secret message.
 
 test1 = MyCipherHacker('guv6Jv6Jz!J6rp5r7Jzr66ntrM')
+test1.MyHack()
