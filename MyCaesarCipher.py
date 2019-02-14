@@ -1,7 +1,8 @@
+import pyperclip # optional
+
 class MyCaesarCipher:
     
-    SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.'
-    returnMsg = ''
+    
     
     def __init__(self, message: str, mode: str, key: int):
         self.message = message
@@ -9,22 +10,26 @@ class MyCaesarCipher:
         self.key = key
         
     def encrytdecrypt(self) -> str:
+        # scope 처리 향후 더하기
+        SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.'
+        idx: int
+        returnMsg = ''
+        
+        
         for symbol in self.message:
             if symbol in SYMBOLS:
                 index = SYMBOLS.find(symbol)
                 if self.mode == 'encrypt':
-                    mutateIndex = idex + self.key
+                    mutateIdx = idx + self.key
                 elif self.mode == 'decrypt':
-                    mutateIndex = idex - self.key
+                    mutateIdx = idx - self.key
                     
                 # produced index be in the range     
-                if mutateIndex >= len(SYMBOLS):
-                    #mutateIndex -= len(SYMBOLS)
-                    mutateIndex = mutateIndex - len(SYMBOLS)
-                elif mutateIndex < 0:
-                    #mutateIndex += len(SYMBOLS)
-                    mutateIndex = mutateIndex + len(SYMBOLS)
-                
+                if mutateIdx >= len(SYMBOLS):
+                    mutateIdx -= len(SYMBOLS)
+                elif mutateIdx < 0:
+                    mutateIdx += len(SYMBOLS)
+                    
                 # append a char to the return
                 returnMsg = returnMsg + SYMBOLS[mutateIndex]
                 
@@ -32,5 +37,11 @@ class MyCaesarCipher:
                 returnMsg = returnMsg + symbol
         
         return returnMsg
-        print(returnMsg)
-        
+
+    
+test1 = MyCaesarCipher('hello, #world@!','encrypt',16)
+pyperclip.copy(test1.encrytdecrypt())
+print(test1.encrytdecrypt())
+
+test2 = MyCaesarCipher(pyperclip.paste(),'decrypt',16)
+print(test2.encrytdecrypt())
